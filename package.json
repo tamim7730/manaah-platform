@@ -1,12 +1,15 @@
 {
-  "name": "my-v0-project",
-  "version": "0.1.0",
+  "name": "manaah-platform",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "railway:deploy": "railway up",
+    "db:setup": "node scripts/setup-database.js",
+    "db:seed": "node scripts/seed-sample-data.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
