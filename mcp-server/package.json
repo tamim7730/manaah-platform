@@ -12,7 +12,7 @@
     "build"
   ],
   "scripts": {
-    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "build": "tsc && node -e \"import('fs').then(fs => fs.chmodSync('build/index.js', '755'))\"",
     "start": "node build/index.js",
     "dev": "tsc --watch",
     "prepare": "npm run build",
