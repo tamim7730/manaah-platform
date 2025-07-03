@@ -14,7 +14,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "railway:deploy": "railway up",
-    "render:deploy": "npm run build && npm run start",
+    "render:deploy": "npm ci && npm run build",
     "db:setup": "node scripts/setup-database.js",
     "db:seed": "node scripts/seed-sample-data.js",
     "db:migrate": "node scripts/migrate-database.js",
