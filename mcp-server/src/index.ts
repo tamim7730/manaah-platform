@@ -20,6 +20,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Root endpoint
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({
+    message: 'مرحباً بك في خادم منصة مناح لإدارة الأمراض الوبائية',
+    service: 'Manaah MCP Server',
+    version: process.env.MCP_SERVER_VERSION || '1.0.0',
+    status: 'running',
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      health: '/health',
+      documentation: 'هذا خادم MCP مخصص لإدارة الأمراض الوبائية'
+    }
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({
