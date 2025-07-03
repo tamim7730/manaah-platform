@@ -1,0 +1,200 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "الرياض",
+        "name_en": "Riyadh",
+        "population": 8216284,
+        "id": "SA01"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [42.5, 20.5], [49.0, 20.5], [49.0, 27.5], [42.5, 27.5], [42.5, 20.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "مكة المكرمة",
+        "name_en": "Makkah",
+        "population": 8557766,
+        "id": "SA02"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [39.0, 19.5], [43.5, 19.5], [43.5, 25.5], [39.0, 25.5], [39.0, 19.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "المنطقة الشرقية",
+        "name_en": "Eastern Province",
+        "population": 5120373,
+        "id": "SA04"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [47.0, 22.0], [55.0, 22.0], [55.0, 32.0], [47.0, 32.0], [47.0, 22.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "عسير",
+        "name_en": "Asir",
+        "population": 2211875,
+        "id": "SA14"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [41.5, 17.0], [44.0, 17.0], [44.0, 20.5], [41.5, 20.5], [41.5, 17.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "المدينة المنورة",
+        "name_en": "Madinah",
+        "population": 2132679,
+        "id": "SA03"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [36.0, 22.0], [41.0, 22.0], [41.0, 28.5], [36.0, 28.5], [36.0, 22.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "جازان",
+        "name_en": "Jazan",
+        "population": 1567547,
+        "id": "SA09"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [41.0, 16.0], [44.0, 16.0], [44.0, 18.0], [41.0, 18.0], [41.0, 16.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "القصيم",
+        "name_en": "Qassim",
+        "population": 1370727,
+        "id": "SA05"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [42.0, 25.0], [45.5, 25.0], [45.5, 27.5], [42.0, 27.5], [42.0, 25.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "تبوك",
+        "name_en": "Tabuk",
+        "population": 910030,
+        "id": "SA07"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [34.5, 25.0], [39.5, 25.0], [39.5, 30.0], [34.5, 30.0], [34.5, 25.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "حائل",
+        "name_en": "Hail",
+        "population": 731147,
+        "id": "SA06"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [39.5, 25.5], [43.5, 25.5], [43.5, 29.0], [39.5, 29.0], [39.5, 25.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "الحدود الشمالية",
+        "name_en": "Northern Borders",
+        "population": 320524,
+        "id": "SA08"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [39.0, 29.0], [46.0, 29.0], [46.0, 32.5], [39.0, 32.5], [39.0, 29.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "نجران",
+        "name_en": "Najran",
+        "population": 595705,
+        "id": "SA10"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [44.0, 16.5], [50.0, 16.5], [50.0, 20.0], [44.0, 20.0], [44.0, 16.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "الجوف",
+        "name_en": "Al Jawf",
+        "population": 508475,
+        "id": "SA12"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [37.0, 28.0], [42.0, 28.0], [42.0, 32.0], [37.0, 32.0], [37.0, 28.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "الباحة",
+        "name_en": "Al Bahah",
+        "population": 476172,
+        "id": "SA11"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [41.0, 19.5], [42.5, 19.5], [42.5, 21.0], [41.0, 21.0], [41.0, 19.5]
+        ]]
+      }
+    }
+  ]
+}

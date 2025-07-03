@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 98%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    direction: rtl;
+    text-align: right;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-cairo), "Cairo", system-ui, -apple-system, sans-serif;
+    direction: rtl;
+    text-align: right;
+  }
+}
+
+/* RTL Support - شامل */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] * {
+  direction: rtl;
+}
+
+/* إصلاح Flexbox للـ RTL */
+[dir="rtl"] .flex {
+  direction: rtl;
+}
+
+[dir="rtl"] .flex-row {
+  flex-direction: row;
+}
+
+[dir="rtl"] .flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+/* إصلاح المسافات للـ RTL */
+[dir="rtl"] .ml-1 {
+  margin-right: 0.25rem;
+  margin-left: 0;
+}
+[dir="rtl"] .ml-2 {
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+[dir="rtl"] .ml-3 {
+  margin-right: 0.75rem;
+  margin-left: 0;
+}
+[dir="rtl"] .ml-4 {
+  margin-right: 1rem;
+  margin-left: 0;
+}
+[dir="rtl"] .ml-6 {
+  margin-right: 1.5rem;
+  margin-left: 0;
+}
+[dir="rtl"] .ml-8 {
+  margin-right: 2rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .mr-1 {
+  margin-left: 0.25rem;
+  margin-right: 0;
+}
+[dir="rtl"] .mr-2 {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+[dir="rtl"] .mr-3 {
+  margin-left: 0.75rem;
+  margin-right: 0;
+}
+[dir="rtl"] .mr-4 {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+[dir="rtl"] .mr-6 {
+  margin-left: 1.5rem;
+  margin-right: 0;
+}
+[dir="rtl"] .mr-8 {
+  margin-left: 2rem;
+  margin-right: 0;
+}
+
+[dir="rtl"] .pl-1 {
+  padding-right: 0.25rem;
+  padding-left: 0;
+}
+[dir="rtl"] .pl-2 {
+  padding-right: 0.5rem;
+  padding-left: 0;
+}
+[dir="rtl"] .pl-3 {
+  padding-right: 0.75rem;
+  padding-left: 0;
+}
+[dir="rtl"] .pl-4 {
+  padding-right: 1rem;
+  padding-left: 0;
+}
+[dir="rtl"] .pl-8 {
+  padding-right: 2rem;
+  padding-left: 0;
+}
+
+[dir="rtl"] .pr-1 {
+  padding-left: 0.25rem;
+  padding-right: 0;
+}
+[dir="rtl"] .pr-2 {
+  padding-left: 0.5rem;
+  padding-right: 0;
+}
+[dir="rtl"] .pr-3 {
+  padding-left: 0.75rem;
+  padding-right: 0;
+}
+[dir="rtl"] .pr-4 {
+  padding-left: 1rem;
+  padding-right: 0;
+}
+[dir="rtl"] .pr-8 {
+  padding-left: 2rem;
+  padding-right: 0;
+}
+
+/* إصلاح النصوص */
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* إصلاح الأيقونات */
+[dir="rtl"] .transform.rotate-180 {
+  transform: scaleX(-1);
+}
+
+/* إصلاح الجداول */
+[dir="rtl"] table {
+  direction: rtl;
+}
+
+[dir="rtl"] th,
+[dir="rtl"] td {
+  text-align: right;
+}
+
+/* إصلاح النماذج */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  direction: rtl;
+  text-align: right;
+}
+
+/* إصلاح شريط التمرير */
+[dir="rtl"] ::-webkit-scrollbar {
+  width: 8px;
+}
+
+[dir="rtl"] ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+[dir="rtl"] ::-webkit-scrollbar-thumb {
+  background: #09764c;
+  border-radius: 4px;
+}
+
+[dir="rtl"] ::-webkit-scrollbar-thumb:hover {
+  background: #065a39;
+}
+
+/* إصلاح الأزرار والروابط */
+[dir="rtl"] .inline-flex {
+  direction: rtl;
+}
+
+/* إصلاح القوائم */
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+/* إصلاح البطاقات */
+[dir="rtl"] .card {
+  direction: rtl;
+  text-align: right;
+}
+
+/* إصلاح التنقل */
+[dir="rtl"] nav {
+  direction: rtl;
+}
+
+[dir="rtl"] .space-x-1 > * + * {
+  margin-right: 0.25rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-2 > * + * {
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-4 > * + * {
+  margin-right: 1rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-6 > * + * {
+  margin-right: 1.5rem;
+  margin-left: 0;
+}
+
+/* إصلاف الشبكة */
+[dir="rtl"] .grid {
+  direction: rtl;
+}
+
+/* إصلاح المحاذاة */
+[dir="rtl"] .justify-start {
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .justify-end {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .items-start {
+  align-items: flex-end;
+}
+
+[dir="rtl"] .items-end {
+  align-items: flex-start;
+}
