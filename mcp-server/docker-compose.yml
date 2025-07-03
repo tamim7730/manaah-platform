@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgis/postgis:15-3.3
+    container_name: manaah-mcp-postgres
+    environment:
+      POSTGRES_DB: manaah_platform
+      POSTGRES_USER: manaah_user
+      POSTGRES_PASSWORD: manaah_password
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database-setup.sql:/docker-entrypoint-initdb.d/01-setup.sql
+    networks:
+      - manaah-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U manaah_user -d manaah_platform"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MCP Server
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: manaah-mcp-server
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      
+      # Database Configuration
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: manaah_platform
+      DB_USER: manaah_user
+      DB_PASSWORD: manaah_password
+      
+      # JWT Configuration
+      JWT_SECRET: your-super-secret-jwt-key-change-in-production
+      JWT_EXPIRES_IN: 24h
+      
+      # MCP Server Configuration
+      MCP_SERVER_NAME: manaah-platform
+      MCP_SERVER_VERSION: 1.0.0
+      
+      # API Configuration
+      API_BASE_URL: http://localhost:3000
+      
+      # Render Configuration (for development)
+      RENDER_EXTERNAL_URL: http://localhost:3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - manaah-network
+    volumes:
+      - ./src:/app/src
+      - ./package.json:/app/package.json
+      - ./tsconfig.json:/app/tsconfig.json
+    command: npm run dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis (Optional - for caching and sessions)
+  redis:
+    image: redis:7-alpine
+    container_name: manaah-mcp-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - manaah-network
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  manaah-network:
+    driver: bridge
