@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { Database } from "@/lib/database"
 import { withAuth } from "@/lib/middleware"
 import type { Governorate } from "@/lib/types"
 
 // جلب محافظات منطقة معينة
-export const GET = withAuth(async (req, { params }: { params: { id: string } }) => {
+export const GET = withAuth(async (req: NextRequest, { params }: { params: { id: string } }) => {
   try {
     const regionId = Number.parseInt(params.id)
     const { searchParams } = new URL(req.url)

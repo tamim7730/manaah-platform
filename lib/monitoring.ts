@@ -55,7 +55,7 @@ class MonitoringService {
       url: req?.url,
       method: req?.method,
       userAgent: req?.headers.get("user-agent"),
-      ip: req?.ip || req?.headers.get("x-forwarded-for"),
+      ip: req?.headers.get("x-forwarded-for") || req?.headers.get("x-real-ip") || "unknown",
     }
 
     console.error("❌ خطأ في التطبيق:", errorInfo)
@@ -152,7 +152,7 @@ class MonitoringService {
   private async checkDatabase() {
     try {
       const { Database } = await import("./database")
-      const result = await Database.query("SELECT 1")
+      await Database.query("SELECT 1")
       return {
         status: "healthy" as const,
         responseTime: Date.now(),

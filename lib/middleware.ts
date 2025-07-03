@@ -9,8 +9,8 @@ export interface AuthenticatedRequest extends NextRequest {
   }
 }
 
-export function withAuth(handler: (req: AuthenticatedRequest) => Promise<NextResponse>, requiredRoles: string[] = []) {
-  return async (req: AuthenticatedRequest): Promise<NextResponse> => {
+export function withAuth(handler: (req: AuthenticatedRequest, context?: any) => Promise<NextResponse>, requiredRoles: string[] = []) {
+  return async (req: AuthenticatedRequest, context?: any): Promise<NextResponse> => {
     try {
       const authHeader = req.headers.get("authorization")
       const token = AuthService.extractTokenFromHeader(authHeader || "")
@@ -32,7 +32,7 @@ export function withAuth(handler: (req: AuthenticatedRequest) => Promise<NextRes
       // إضافة معلومات المستخدم إلى الطلب
       req.user = payload
 
-      return handler(req)
+      return handler(req, context)
     } catch (error) {
       console.error("Authentication error:", error)
       return NextResponse.json({ success: false, error: "خطأ في المصادقة" }, { status: 500 })
@@ -40,10 +40,10 @@ export function withAuth(handler: (req: AuthenticatedRequest) => Promise<NextRes
   }
 }
 
-export function adminOnly(handler: (req: AuthenticatedRequest) => Promise<NextResponse>) {
+export function adminOnly(handler: (req: AuthenticatedRequest, context?: any) => Promise<NextResponse>) {
   return withAuth(handler, ["admin"])
 }
 
-export function dataEntryOrAdmin(handler: (req: AuthenticatedRequest) => Promise<NextResponse>) {
+export function dataEntryOrAdmin(handler: (req: AuthenticatedRequest, context?: any) => Promise<NextResponse>) {
   return withAuth(handler, ["admin", "data_entry"])
 }

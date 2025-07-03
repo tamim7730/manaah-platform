@@ -420,8 +420,8 @@ export function RealInteractiveMap({ onRegionClick, className }: RealInteractive
           })
 
           // إضافة مفتاح الخريطة
-          const legend = L.control({ position: "bottomright" })
-          legend.onAdd = () => {
+          const legend = new L.Control({ position: "bottomright" })
+          legend.onAdd = (): HTMLElement => {
             const div = L.DomUtil.create("div", "legend")
             div.style.cssText = `
               background: white;

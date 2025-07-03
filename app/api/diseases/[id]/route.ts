@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { Database, QueryBuilder } from "@/lib/database"
 import { withAuth, dataEntryOrAdmin } from "@/lib/middleware"
 import type { Disease } from "@/lib/types"
 
 // جلب مرض محدد
-export const GET = withAuth(async (req, { params }: { params: { id: string } }) => {
+export const GET = withAuth(async (req: NextRequest, { params }: { params: { id: string } }) => {
   try {
     const diseaseId = Number.parseInt(params.id)
 
@@ -44,7 +44,7 @@ export const GET = withAuth(async (req, { params }: { params: { id: string } }) 
 })
 
 // تحديث مرض
-export const PUT = dataEntryOrAdmin(async (req, { params }: { params: { id: string } }) => {
+export const PUT = dataEntryOrAdmin(async (req: NextRequest, { params }: { params: { id: string } }) => {
   try {
     const diseaseId = Number.parseInt(params.id)
     const body = await req.json()
@@ -82,8 +82,11 @@ export const PUT = dataEntryOrAdmin(async (req, { params }: { params: { id: stri
       [diseaseId],
     )
 
-    const result = await Database.query(query, values)
-    const updatedDisease = result.rows[0]
+    await Database.query(query, values)
+    
+    // جلب البيانات المحدثة
+    const updatedResult = await Database.query("SELECT * FROM diseases WHERE id = $1", [diseaseId])
+    const updatedDisease = updatedResult.rows[0]
 
     const disease: Disease = {
       id: updatedDisease.id,
@@ -111,7 +114,7 @@ export const PUT = dataEntryOrAdmin(async (req, { params }: { params: { id: stri
 })
 
 // حذف مرض
-export const DELETE = dataEntryOrAdmin(async (req, { params }: { params: { id: string } }) => {
+export const DELETE = dataEntryOrAdmin(async (req: NextRequest, { params }: { params: { id: string } }) => {
   try {
     const diseaseId = Number.parseInt(params.id)
 

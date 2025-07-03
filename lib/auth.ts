@@ -35,7 +35,7 @@ export class AuthService {
       expiresIn: JWT_EXPIRES_IN,
       issuer: "manaah-platform",
       audience: "manaah-users",
-    })
+    } as jwt.SignOptions)
   }
 
   // التحقق من JWT token
