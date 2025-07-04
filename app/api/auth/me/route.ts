@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
 import { Database } from "@/lib/database"
-import { withAuth } from "@/lib/middleware"
+import { withAuth, type AuthenticatedRequest } from "@/lib/middleware"
 
-export const GET = withAuth(async (req) => {
+export const GET = withAuth(async (req: AuthenticatedRequest) => {
   try {
     const userId = req.user?.userId
 

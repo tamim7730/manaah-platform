@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Database, QueryBuilder } from "@/lib/database"
-import { withAuth, dataEntryOrAdmin } from "@/lib/middleware"
+import { withAuth, dataEntryOrAdmin, type AuthenticatedRequest } from "@/lib/middleware"
 import type { Disease } from "@/lib/types"
 
 // جلب مرض محدد
-export const GET = withAuth(async (req: NextRequest, { params }: { params: { id: string } }) => {
+export const GET = withAuth(async (req: AuthenticatedRequest, { params }: { params: { id: string } }) => {
   try {
     const diseaseId = Number.parseInt(params.id)
 
@@ -45,7 +45,7 @@ export const GET = withAuth(async (req: NextRequest, { params }: { params: { id:
 })
 
 // تحديث مرض
-export const PUT = dataEntryOrAdmin(async (req: NextRequest, { params }: { params: { id: string } }) => {
+export const PUT = dataEntryOrAdmin(async (req: AuthenticatedRequest, { params }: { params: { id: string } }) => {
   try {
     const diseaseId = Number.parseInt(params.id)
     const body = await req.json()
@@ -116,7 +116,7 @@ export const PUT = dataEntryOrAdmin(async (req: NextRequest, { params }: { param
 })
 
 // حذف مرض
-export const DELETE = dataEntryOrAdmin(async (req: NextRequest, { params }: { params: { id: string } }) => {
+export const DELETE = dataEntryOrAdmin(async (req: AuthenticatedRequest, { params }: { params: { id: string } }) => {
   try {
     const diseaseId = Number.parseInt(params.id)
 
