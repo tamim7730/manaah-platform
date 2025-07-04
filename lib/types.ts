@@ -17,7 +17,7 @@ export interface Region {
   nameAr: string
   nameEn: string
   code: string
-  geojsonData?: any
+  geojsonData?: Record<string, unknown>
   population?: number
   areaKm2?: number
   createdAt: string
@@ -30,7 +30,7 @@ export interface Governorate {
   nameAr: string
   nameEn: string
   code: string
-  geojsonData?: any
+  geojsonData?: Record<string, unknown>
   population?: number
   areaKm2?: number
   epidemicBeltRisk: "low" | "medium" | "high"
@@ -133,7 +133,7 @@ export interface AuthResponse {
   message?: string
 }
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean
   data?: T
   message?: string

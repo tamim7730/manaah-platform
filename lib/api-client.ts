@@ -45,6 +45,7 @@ class ApiClient {
 
       return data
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("API Request Error:", error)
       throw error
     }
@@ -203,7 +204,13 @@ class ApiClient {
       recentSurveys: Survey[]
     }>
   > {
-    return this.request<ApiResponse<any>>("/dashboard/stats")
+    return this.request<ApiResponse<{
+      totalDiseases: number
+      totalRegions: number
+      totalSurveys: number
+      activeSurveys: number
+      recentSurveys: Survey[]
+    }>>("/dashboard/stats")
   }
 }
 

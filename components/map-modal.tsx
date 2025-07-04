@@ -20,7 +20,8 @@ const downloadMap = async (mapPath: string, mapName: string) => {
     document.body.removeChild(link)
     window.URL.revokeObjectURL(url)
   } catch (error) {
-    console.error('خطأ في تحميل الخريطة:', error)
+    // eslint-disable-next-line no-console
+      console.error('خطأ في تحميل الخريطة:', error)
     alert('فشل في تحميل الخريطة')
   }
 }

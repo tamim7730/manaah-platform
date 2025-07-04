@@ -53,7 +53,7 @@ interface MapSettings {
 
 interface AdvancedSaudiMapProps {
   mapSettings?: MapSettings
-  regions?: any[]
+  regions?: Record<string, unknown>[]
 }
 
 const AdvancedSaudiMap: React.FC<AdvancedSaudiMapProps> = ({ mapSettings, regions: passedRegions }) => {
@@ -83,7 +83,7 @@ const AdvancedSaudiMap: React.FC<AdvancedSaudiMapProps> = ({ mapSettings, region
   const [searchTerm, setSearchTerm] = useState('')
   const [activeTab, setActiveTab] = useState('map')
   const [loading, setLoading] = useState(true)
-  const [mapInstance, setMapInstance] = useState<any>(null)
+  const [mapInstance, setMapInstance] = useState<unknown>(null)
   const [zoomLevel, setZoomLevel] = useState(6)
   const [mapContainerId] = useState(`map-container-${Math.random().toString(36).substr(2, 9)}`)
   const mapRef = useRef<HTMLDivElement>(null)
@@ -101,7 +101,7 @@ const AdvancedSaudiMap: React.FC<AdvancedSaudiMapProps> = ({ mapSettings, region
             code: region.code || `R${index + 1}`,
             name_ar: region.nameAr,
             name_en: region.nameEn || region.nameAr,
-            population: region.governorates?.reduce((total: number, gov: any) => {
+            population: region.governorates?.reduce((total: number, gov: Record<string, unknown>) => {
               return total + (gov.population || 100000)
             }, 0) || 500000,
             center: region.center || [24.0 + (index * 2), 45.0 + (index * 2)]
@@ -130,7 +130,8 @@ const AdvancedSaudiMap: React.FC<AdvancedSaudiMapProps> = ({ mapSettings, region
         setDistricts(districtsData)
         setLoading(false)
       } catch (error) {
-        console.error('Error loading data:', error)
+        // eslint-disable-next-line no-console
+      console.error('Error loading data:', error)
         setLoading(false)
       }
     }
@@ -169,7 +170,8 @@ const AdvancedSaudiMap: React.FC<AdvancedSaudiMapProps> = ({ mapSettings, region
           mapInstance.off()
           mapInstance.remove()
         } catch (error) {
-          console.warn('Error removing previous map instance:', error)
+          // eslint-disable-next-line no-console
+        console.warn('Error removing previous map instance:', error)
         }
         setMapInstance(null)
       }
@@ -318,7 +320,8 @@ const AdvancedSaudiMap: React.FC<AdvancedSaudiMapProps> = ({ mapSettings, region
         setMapInstance(map)
         setZoomLevel(settings.defaultZoom)
       } catch (error) {
-        console.error("Error loading map:", error)
+        // eslint-disable-next-line no-console
+      console.error("Error loading map:", error)
       }
     }
 
@@ -331,7 +334,8 @@ const AdvancedSaudiMap: React.FC<AdvancedSaudiMapProps> = ({ mapSettings, region
           mapInstance.off()
           mapInstance.remove()
         } catch (error) {
-          console.warn('Error during map cleanup:', error)
+          // eslint-disable-next-line no-console
+      console.warn('Error during map cleanup:', error)
         }
         setMapInstance(null)
       }

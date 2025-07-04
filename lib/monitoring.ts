@@ -40,6 +40,7 @@ class MonitoringService {
 
     // تسجيل في وحدة التحكم إذا كان الوقت طويل
     if (responseTime > 5000) {
+      // eslint-disable-next-line no-console
       console.warn(`⚠️  طلب بطيء: ${req.url} - ${responseTime}ms`)
     }
   }
@@ -58,6 +59,7 @@ class MonitoringService {
       ip: req?.headers.get("x-forwarded-for") || req?.headers.get("x-real-ip") || "unknown",
     }
 
+    // eslint-disable-next-line no-console
     console.error("❌ خطأ في التطبيق:", errorInfo)
 
     // إرسال إلى خدمة المراقبة الخارجية
@@ -71,7 +73,7 @@ class MonitoringService {
   }
 
   // إرسال إلى خدمة مراقبة خارجية
-  private async sendToExternalMonitoring(data: any) {
+  private async sendToExternalMonitoring(data: Record<string, unknown>) {
     try {
       // يمكن إرسال البيانات إلى Sentry، DataDog، أو أي خدمة مراقبة أخرى
       if (process.env.MONITORING_WEBHOOK_URL) {
@@ -82,6 +84,7 @@ class MonitoringService {
         })
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("فشل في إرسال البيانات للمراقبة:", error)
     }
   }

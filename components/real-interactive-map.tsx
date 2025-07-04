@@ -316,14 +316,14 @@ const RISK_LABELS = {
 }
 
 interface RealInteractiveMapProps {
-  onRegionClick?: (region: any) => void
+  onRegionClick?: (region: Record<string, unknown>) => void
   className?: string
 }
 
 export function RealInteractiveMap({ onRegionClick, className }: RealInteractiveMapProps) {
   const mapRef = useRef<HTMLDivElement>(null)
-  const [selectedRegion, setSelectedRegion] = useState<any>(null)
-  const [mapInstance, setMapInstance] = useState<any>(null)
+  const [selectedRegion, setSelectedRegion] = useState<Record<string, unknown> | null>(null)
+  const [mapInstance, setMapInstance] = useState<unknown>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [zoomLevel, setZoomLevel] = useState(6)
 
@@ -452,7 +452,8 @@ export function RealInteractiveMap({ onRegionClick, className }: RealInteractive
           setIsLoading(false)
         }
       } catch (error) {
-        console.error("Error loading map:", error)
+        // eslint-disable-next-line no-console
+      console.error("Error loading map:", error)
         setIsLoading(false)
       }
     }

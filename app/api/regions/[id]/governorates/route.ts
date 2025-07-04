@@ -16,7 +16,7 @@ export const GET = withAuth(async (req: NextRequest, { params }: { params: { id:
     }
 
     let whereClause = "region_id = $1"
-    const queryParams: any[] = [regionId]
+    const queryParams: unknown[] = [regionId]
     let paramIndex = 2
 
     if (epidemicBeltRisk) {
@@ -51,7 +51,7 @@ export const GET = withAuth(async (req: NextRequest, { params }: { params: { id:
 
     const result = await Database.query(query, queryParams)
 
-    const governorates: Governorate[] = result.rows.map((row: any) => ({
+    const governorates: Governorate[] = result.rows.map((row: Record<string, unknown>) => ({
       id: row.id,
       regionId: row.region_id,
       nameAr: row.name_ar,
@@ -78,6 +78,7 @@ export const GET = withAuth(async (req: NextRequest, { params }: { params: { id:
       data: governorates,
     })
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Get governorates error:", error)
     return NextResponse.json({ success: false, error: "خطأ في جلب بيانات المحافظات" }, { status: 500 })
   }

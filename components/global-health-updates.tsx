@@ -256,6 +256,7 @@ export function GlobalHealthUpdates() {
         toast.error('خطأ في تحميل التنبيهات')
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error fetching alerts:', error)
       toast.error('خطأ في الاتصال بالخادم')
     }
@@ -273,6 +274,7 @@ export function GlobalHealthUpdates() {
         toast.error('خطأ في تحميل الإحصائيات')
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error fetching stats:', error)
       toast.error('خطأ في الاتصال بالخادم')
     }
@@ -305,12 +307,16 @@ export function GlobalHealthUpdates() {
             description: `${newAlert.disease} في ${newAlert.location}, ${newAlert.country}`,
             action: {
               label: 'عرض التفاصيل',
-              onClick: () => console.log('View alert:', newAlert.id),
+              onClick: () => {
+          // eslint-disable-next-line no-console
+          console.log('View alert:', newAlert.id)
+        },
             },
           })
         }
       } catch (error) {
-        console.error('Error checking for updates:', error)
+        // eslint-disable-next-line no-console
+      console.error('Error checking for updates:', error)
       }
     }, 30000) // Check every 30 seconds
 
@@ -525,6 +531,7 @@ export function GlobalHealthUpdates() {
       })
       
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error generating PDF:', error)
       toast.error('خطأ في إنشاء التقرير', {
         description: 'حدث خطأ أثناء إنشاء ملف PDF'
@@ -805,6 +812,7 @@ export function GlobalHealthUpdates() {
       })
       
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error generating advanced PDF:', error)
       toast.error('خطأ في إنشاء التقرير المتقدم', {
         description: 'حدث خطأ أثناء إنشاء ملف PDF المتقدم'

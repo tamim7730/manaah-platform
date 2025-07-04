@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { Printer, Download, X, FileText, Calendar, MapPin, Activity, TrendingUp, Users, AlertTriangle, CheckCircle, Clock, Table, Bug } from "lucide-react"
 
 interface SurveyDetailModalProps {
-  survey: any
+  survey: Record<string, unknown>
   isOpen: boolean
   onClose: () => void
 }
@@ -338,7 +338,7 @@ export function SurveyDetailModal({ survey, isOpen, onClose }: SurveyDetailModal
                       </tr>
                     </thead>
                     <tbody>
-                      {survey.positiveDetails?.map((detail: any, index: number) => {
+                      {survey.positiveDetails?.map((detail: Record<string, unknown>, index: number) => {
                         const belt = getEpidemiologicalBelt(detail.governorate)
                         return (
                           <tr key={index} className="hover:bg-gray-50">
@@ -466,7 +466,7 @@ export function SurveyDetailModal({ survey, isOpen, onClose }: SurveyDetailModal
                   <div className="bg-red-50 p-4 rounded-lg border border-red-200">
                     <div className="text-center">
                       <div className="text-2xl font-bold text-red-600">
-                        {survey.positiveDetails?.reduce((sum: number, detail: any) => sum + detail.count, 0) || 45}
+                        {survey.positiveDetails?.reduce((sum: number, detail: Record<string, unknown>) => sum + (detail.count as number), 0) || 45}
                       </div>
                       <div className="text-sm text-red-700">إجمالي العينات الموجبة</div>
                     </div>
@@ -474,7 +474,7 @@ export function SurveyDetailModal({ survey, isOpen, onClose }: SurveyDetailModal
                   <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
                     <div className="text-center">
                       <div className="text-2xl font-bold text-orange-600">
-                        {survey.positiveDetails?.filter((detail: any) => detail.status === 'مؤكد').reduce((sum: number, detail: any) => sum + detail.count, 0) || 42}
+                        {survey.positiveDetails?.filter((detail: Record<string, unknown>) => detail.status === 'مؤكد').reduce((sum: number, detail: Record<string, unknown>) => sum + (detail.count as number), 0) || 42}
                       </div>
                       <div className="text-sm text-orange-700">الحالات المؤكدة</div>
                     </div>
@@ -482,7 +482,7 @@ export function SurveyDetailModal({ survey, isOpen, onClose }: SurveyDetailModal
                   <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
                     <div className="text-center">
                       <div className="text-2xl font-bold text-yellow-600">
-                        {survey.positiveDetails?.filter((detail: any) => detail.status === 'مشتبه').reduce((sum: number, detail: any) => sum + detail.count, 0) || 3}
+                        {survey.positiveDetails?.filter((detail: Record<string, unknown>) => detail.status === 'مشتبه').reduce((sum: number, detail: Record<string, unknown>) => sum + (detail.count as number), 0) || 3}
                       </div>
                       <div className="text-sm text-yellow-700">الحالات المشتبهة</div>
                     </div>
@@ -554,7 +554,7 @@ export function SurveyDetailModal({ survey, isOpen, onClose }: SurveyDetailModal
                     </tr>
                   </thead>
                   <tbody>
-                    {survey.entomologicalSurvey?.details?.map((detail: any, index: number) => {
+                    {survey.entomologicalSurvey?.details?.map((detail: Record<string, unknown>, index: number) => {
                       const belt = getEpidemiologicalBelt(detail.governorate)
                       const positivityRate = detail.totalTraps > 0 ? ((detail.positiveTraps / detail.totalTraps) * 100).toFixed(1) : '0.0'
                       return (

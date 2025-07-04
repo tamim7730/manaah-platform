@@ -8,7 +8,7 @@ const pool = new Pool({
 
 export class Database {
   // تنفيذ استعلام SQL
-  static async query(text: string, params?: any[]): Promise<any> {
+  static async query(text: string, params?: unknown[]): Promise<unknown> {
     const client = await pool.connect()
     try {
       const result = await client.query(text, params)
@@ -19,7 +19,7 @@ export class Database {
   }
 
   // تنفيذ معاملة (Transaction)
-  static async transaction<T>(callback: (client: any) => Promise<T>): Promise<T> {
+  static async transaction<T>(callback: (client: unknown) => Promise<T>): Promise<T> {
     const client = await pool.connect()
     try {
       await client.query("BEGIN")
@@ -73,7 +73,7 @@ export class QueryBuilder {
   }
 
   // بناء استعلام INSERT
-  static buildInsertQuery(table: string, data: Record<string, any>): { query: string; values: any[] } {
+  static buildInsertQuery(table: string, data: Record<string, unknown>): { query: string; values: unknown[] } {
     const columns = Object.keys(data)
     const placeholders = columns.map((_, index) => `$${index + 1}`)
     const values = Object.values(data)
@@ -86,10 +86,10 @@ export class QueryBuilder {
   // بناء استعلام UPDATE
   static buildUpdateQuery(
     table: string,
-    data: Record<string, any>,
+    data: Record<string, unknown>,
     whereClause: string,
-    whereValues: any[],
-  ): { query: string; values: any[] } {
+    whereValues: unknown[],
+  ): { query: string; values: unknown[] } {
     const columns = Object.keys(data)
     const setClause = columns.map((col, index) => `${col} = $${index + 1}`).join(", ")
     const values = [...Object.values(data), ...whereValues]

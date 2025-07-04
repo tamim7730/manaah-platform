@@ -44,14 +44,14 @@ const RISK_LABELS = {
 }
 
 interface InteractiveMapProps {
-  onRegionClick?: (region: any) => void
+  onRegionClick?: (region: Record<string, unknown>) => void
   className?: string
 }
 
 export function InteractiveMap({ onRegionClick, className }: InteractiveMapProps) {
-  const [selectedRegion, setSelectedRegion] = useState<any>(null)
+  const [selectedRegion, setSelectedRegion] = useState<Record<string, unknown> | null>(null)
 
-  const handleRegionClick = (region: any) => {
+  const handleRegionClick = (region: Record<string, unknown>) => {
     setSelectedRegion(region)
     onRegionClick?.(region)
   }

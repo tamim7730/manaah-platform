@@ -9,8 +9,8 @@ export interface AuthenticatedRequest extends NextRequest {
   }
 }
 
-export function withAuth(handler: (req: AuthenticatedRequest, context?: any) => Promise<NextResponse>, requiredRoles: string[] = []) {
-  return async (req: AuthenticatedRequest, context?: any): Promise<NextResponse> => {
+export function withAuth(handler: (req: AuthenticatedRequest, context?: unknown) => Promise<NextResponse>, requiredRoles: string[] = []) {
+  return async (req: AuthenticatedRequest, context?: unknown): Promise<NextResponse> => {
     try {
       const authHeader = req.headers.get("authorization")
       const token = AuthService.extractTokenFromHeader(authHeader || "")
@@ -34,16 +34,17 @@ export function withAuth(handler: (req: AuthenticatedRequest, context?: any) => 
 
       return handler(req, context)
     } catch (error) {
-      console.error("Authentication error:", error)
+      // eslint-disable-next-line no-console
+    console.error("Authentication error:", error)
       return NextResponse.json({ success: false, error: "خطأ في المصادقة" }, { status: 500 })
     }
   }
 }
 
-export function adminOnly(handler: (req: AuthenticatedRequest, context?: any) => Promise<NextResponse>) {
+export function adminOnly(handler: (req: AuthenticatedRequest, context?: unknown) => Promise<NextResponse>) {
   return withAuth(handler, ["admin"])
 }
 
-export function dataEntryOrAdmin(handler: (req: AuthenticatedRequest, context?: any) => Promise<NextResponse>) {
+export function dataEntryOrAdmin(handler: (req: AuthenticatedRequest, context?: unknown) => Promise<NextResponse>) {
   return withAuth(handler, ["admin", "data_entry"])
 }

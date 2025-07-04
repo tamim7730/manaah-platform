@@ -47,7 +47,7 @@ export class AuthService {
       }) as JWTPayload
 
       return decoded
-    } catch (error) {
+    } catch {
       return null
     }
   }

@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { MapPin, Download, Eye } from "lucide-react"
+// Button component available but not used in this component
+import { MapPin } from "lucide-react"
 import { MapModal } from "@/components/map-modal"
 
 // بيانات المناطق السعودية مع مسارات الخرائط الصحيحة
@@ -183,14 +183,14 @@ const RISK_LABELS = {
 }
 
 interface SaudiRegionsMapProps {
-  onRegionClick?: (region: any) => void
+  onRegionClick?: (region: Record<string, unknown>) => void
   className?: string
 }
 
 export function SaudiRegionsMap({ onRegionClick, className }: SaudiRegionsMapProps) {
-  const [selectedRegion, setSelectedRegion] = useState<any>(null)
+  const [selectedRegion, setSelectedRegion] = useState<Record<string, unknown> | null>(null)
 
-  const handleRegionClick = (region: any) => {
+  const handleRegionClick = (region: Record<string, unknown>) => {
     setSelectedRegion(region)
     onRegionClick?.(region)
   }

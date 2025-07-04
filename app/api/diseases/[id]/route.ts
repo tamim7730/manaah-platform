@@ -38,6 +38,7 @@ export const GET = withAuth(async (req: NextRequest, { params }: { params: { id:
       data: disease,
     })
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Get disease error:", error)
     return NextResponse.json({ success: false, error: "خطأ في جلب بيانات المرض" }, { status: 500 })
   }
@@ -61,7 +62,7 @@ export const PUT = dataEntryOrAdmin(async (req: NextRequest, { params }: { param
     }
 
     // إعداد البيانات للتحديث
-    const updateData: any = {}
+    const updateData: Record<string, unknown> = {}
     if (body.nameAr) updateData.name_ar = body.nameAr
     if (body.nameEn) updateData.name_en = body.nameEn
     if (body.code) updateData.code = body.code
@@ -108,6 +109,7 @@ export const PUT = dataEntryOrAdmin(async (req: NextRequest, { params }: { param
       message: "تم تحديث المرض بنجاح",
     })
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Update disease error:", error)
     return NextResponse.json({ success: false, error: "خطأ في تحديث المرض" }, { status: 500 })
   }
@@ -140,6 +142,7 @@ export const DELETE = dataEntryOrAdmin(async (req: NextRequest, { params }: { pa
       message: "تم حذف المرض بنجاح",
     })
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Delete disease error:", error)
     return NextResponse.json({ success: false, error: "خطأ في حذف المرض" }, { status: 500 })
   }
