@@ -58,7 +58,7 @@ describe("Diseases API Tests", () => {
           diseaseData.category,
           diseaseData.severity_level,
         ],
-      )
+      ) as { rows: Record<string, unknown>[] }
 
       const disease = result.rows[0]
       testDiseaseId = disease.id
@@ -76,11 +76,11 @@ describe("Diseases API Tests", () => {
         INSERT INTO test_diseases (name_ar, name_en, code)
         VALUES ('حمى الاختبار', 'Test Fever', 'TEST')
         RETURNING id
-      `)
+      `) as { rows: Record<string, unknown>[] }
       const diseaseId = createResult.rows[0].id
 
       // جلب المرض
-      const result = await Database.query("SELECT * FROM test_diseases WHERE id = $1", [diseaseId])
+      const result = await Database.query("SELECT * FROM test_diseases WHERE id = $1", [diseaseId]) as { rows: Record<string, unknown>[] }
 
       expect(result.rows).toHaveLength(1)
       expect(result.rows[0].id).toBe(diseaseId)
@@ -93,7 +93,7 @@ describe("Diseases API Tests", () => {
         INSERT INTO test_diseases (name_ar, name_en, code)
         VALUES ('حمى الاختبار', 'Test Fever', 'TEST')
         RETURNING id
-      `)
+      `) as { rows: Record<string, unknown>[] }
       const diseaseId = createResult.rows[0].id
 
       // تحديث المرض
@@ -105,7 +105,7 @@ describe("Diseases API Tests", () => {
         RETURNING *
       `,
         ["حمى الاختبار المحدثة", "high", diseaseId],
-      )
+      ) as { rows: Record<string, unknown>[] }
 
       const updatedDisease = updateResult.rows[0]
       expect(updatedDisease.name_ar).toBe("حمى الاختبار المحدثة")
@@ -118,17 +118,17 @@ describe("Diseases API Tests", () => {
         INSERT INTO test_diseases (name_ar, name_en, code)
         VALUES ('حمى الاختبار', 'Test Fever', 'TEST')
         RETURNING id
-      `)
+      `) as { rows: Record<string, unknown>[] }
       const diseaseId = createResult.rows[0].id
 
       // حذف المرض
-      const deleteResult = await Database.query("DELETE FROM test_diseases WHERE id = $1 RETURNING id", [diseaseId])
+      const deleteResult = await Database.query("DELETE FROM test_diseases WHERE id = $1 RETURNING id", [diseaseId]) as { rows: Record<string, unknown>[] }
 
       expect(deleteResult.rows).toHaveLength(1)
       expect(deleteResult.rows[0].id).toBe(diseaseId)
 
       // التأكد من الحذف
-      const checkResult = await Database.query("SELECT * FROM test_diseases WHERE id = $1", [diseaseId])
+      const checkResult = await Database.query("SELECT * FROM test_diseases WHERE id = $1", [diseaseId]) as { rows: Record<string, unknown>[] }
       expect(checkResult.rows).toHaveLength(0)
     })
   })
@@ -161,7 +161,7 @@ describe("Diseases API Tests", () => {
           RETURNING severity_level
         `,
           [`حمى ${level}`, `${level} Fever`, `${level.toUpperCase()}`, level],
-        )
+        ) as { rows: Record<string, unknown>[] }
 
         expect(result.rows[0].severity_level).toBe(level)
       }
