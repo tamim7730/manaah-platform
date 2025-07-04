@@ -61,7 +61,7 @@ describe("Diseases API Tests", () => {
       ) as { rows: Record<string, unknown>[] }
 
       const disease = result.rows[0]
-      testDiseaseId = disease.id
+      testDiseaseId = disease.id as number
 
       expect(disease).toBeDefined()
       expect(disease.name_ar).toBe(diseaseData.name_ar)
