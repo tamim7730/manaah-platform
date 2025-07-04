@@ -12,7 +12,7 @@ export const GET = withAuth(async (req: NextRequest, { params }: { params: { id:
       return NextResponse.json({ success: false, error: "معرف المرض غير صالح" }, { status: 400 })
     }
 
-    const result = await Database.query("SELECT * FROM diseases WHERE id = $1", [diseaseId])
+    const result = await Database.query("SELECT * FROM diseases WHERE id = $1", [diseaseId]) as { rows: Record<string, unknown>[] }
 
     if (result.rows.length === 0) {
       return NextResponse.json({ success: false, error: "المرض غير موجود" }, { status: 404 })
@@ -86,7 +86,7 @@ export const PUT = dataEntryOrAdmin(async (req: NextRequest, { params }: { param
     await Database.query(query, values)
     
     // جلب البيانات المحدثة
-    const updatedResult = await Database.query("SELECT * FROM diseases WHERE id = $1", [diseaseId])
+    const updatedResult = await Database.query("SELECT * FROM diseases WHERE id = $1", [diseaseId]) as { rows: Record<string, unknown>[] }
     const updatedDisease = updatedResult.rows[0]
 
     const disease: Disease = {

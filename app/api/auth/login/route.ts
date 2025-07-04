@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     // البحث عن المستخدم في قاعدة البيانات
-    const result = await Database.query("SELECT * FROM users WHERE username = $1 AND is_active = true", [username])
+    const result = await Database.query("SELECT * FROM users WHERE username = $1 AND is_active = true", [username]) as { rows: Record<string, unknown>[] }
 
     if (result.rows.length === 0) {
       return NextResponse.json({ success: false, message: "اسم المستخدم أو كلمة المرور غير صحيحة" }, { status: 401 })
@@ -61,6 +61,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(response)
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Login error:", error)
     return NextResponse.json({ success: false, message: "خطأ في الخادم" }, { status: 500 })
   }
